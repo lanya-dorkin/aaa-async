@@ -1,4 +1,11 @@
+# за глобальные переменные извините, очень стыдно
+order_of_execution = []
+
+
 async def task_1(i: int):
+    global order_of_execution
+    order_of_execution.append('1')
+
     if i == 0:
         return
 
@@ -9,6 +16,9 @@ async def task_1(i: int):
 
 
 async def task_2(i: int):
+    global order_of_execution
+    order_of_execution.append('2')
+
     if i == 0:
         return
 
@@ -27,6 +37,10 @@ async def coroutines_execution_order(i: int = 42) -> int:
     # Пример:
     # i = 7
     # return 12212
+    global order_of_execution
+    order_of_execution = []
+
     await task_1(i)
 
-    # YOUR CODE GOES HERE
+    # 122122122
+    return int(''.join(order_of_execution))
